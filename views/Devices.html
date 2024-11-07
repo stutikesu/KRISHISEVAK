@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Control Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f7;
+    margin: 0;
+    padding: 0;
+}
+.tagline {
+  font-family: 'Georgia', serif; /* Elegant serif font for a professional look */
+  color: #228B22; /* Bright green color */
+  font-style: italic; /* More refined italic style */
+  font-size: 24px; /* Slightly larger for better visibility */
+  margin-top: 10px; /* Add spacing below the title */
+  letter-spacing: 1px; /* Slightly increased letter spacing for readability */
+}
+a.btn-custom {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #28a745; /* Green outline */
+  color: #28a745;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a.btn-custom:hover {
+  background-color: darkgreen; /* Green background on hover */
+  color: white;
+}
+.irrigation-title {
+  font-style: italic; /* Modern font */
+  color: #2E8B57; /* Bright green color */
+  font-size: 21px; /* Adjust size for visibility */
+  font-weight: 600; /* Semi-bold for emphasis */
+  text-align: center; /* Centered alignment */
+  margin: 15px 0; /* Spacing above and below */
+  letter-spacing: 1px; /* Slightly increased letter spacing for readability */
+  /* Soft shadow for depth */
+}
+
+.btn{
+    margin-right: 50px;
+    background-color: green;
+    color:white;
+    overflow: hidden;
+}
+.nav-link{
+    color: black;
+    font-weight: 500;
+   
+}
+
+.navbar a {
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: darkgreen; /* Change the text color on hover */
+  background-color: lightgreen; /* Add a background color on hover */
+  text-decoration: none; /* Remove underline on hover (optional) */
+}
+
+.btn-outline-success a {
+  color: inherit; /* Keep the button's default color */
+   /* Remove underline inside the button */
+}
+
+.btn-outline-success a:hover {
+  color: white; /* Change the text color on hover inside the button */
+  background-color: green; /* Add a hover effect on the button */
+}
+
+/* Adjust carousel image size for smaller screens */
+
+
+.navbar-brand img {
+    max-width: 200%;
+    height: auto;
+  }
+  
+  @media (max-width: 992px) {
+    .navbar-brand img {
+      width: 80px;
+      height: 41px;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 991px) {
+    .navbar-brand img {
+      width: 100px;
+      height: 51px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .navbar-brand img {
+      width: 120px;
+      height: 62px;
+    }
+  }
+
+
+  
+  
+
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    border-radius: 8px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #3a5f3a;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.control-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.control-btn:hover {
+    background-color: #45a049;
+}
+
+.status {
+    margin: 20px 0;
+}
+
+.status ul {
+    list-style: none;
+    padding: 0;
+}
+
+.status li {
+    background-color: #e7f3e7;
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 4px solid #4caf50;
+}
+
+.customization {
+    background-color: #eef5ee;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+form label, form input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+</style>
+<body>
+    
+    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="\images\WhatsApp_Image_2024-09-16_at_11.50.45_PM-removebg-preview.png">
+          </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+</button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+         
+          
+          <li class="nav-item">
+            <a class="nav-link" href="\Aboutus">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\contactus">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\AI">Ask Your Plant</a>
+          </li>&nbsp;&nbsp;&nbsp;
+   
+        <li class="nav-item">
+            <h1 class="irrigation-title" style="margin-top: 7px;">An Automated Irrigation System with the Power of AI</h1>
+        </li>
+        
+        </ul>
+       
+        </div>
+        
+        </div>
+    
+       
+
+
+</nav>
+    <div class="container">
+        <h1>Device Control</h1>
+        <div class="buttons">
+            <button id="onButton" class="control-btn">Turn On Device</button>
+            <button id="offButton" class="control-btn">Turn Off Device</button>
+        </div>
+
+        <div class="status">
+            <h2>Device Status</h2>
+            <ul id="statusLog"></ul>
+        </div>
+
+        <div class="customization">
+            <h2>Customize Device Settings</h2>
+            <form id="customForm" action="/save-device-settings" method="POST">
+                <label for="openTime">Device Open Time:</label>
+                <input type="time" id="openTime" name="openTime" required>
+                <br>
+                <label for="closeTime">Device Close Time:</label>
+                <input type="time" id="closeTime" name="closeTime" required>
+                <br>
+                <label for="usage">Irrigation Usage (hours):</label>
+                <input type="number" id="usage" name="usage" min="0" required>
+                <br>
+                <button type="submit" class="control-btn">Save Settings</button>
+            </form>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const onButton = document.getElementById("onButton");
+    const offButton = document.getElementById("offButton");
+    const statusLog = document.getElementById("statusLog");
+    const customForm = document.getElementById("customForm");
+
+    let deviceStatus = [];
+
+    // Function to log device status
+    function logStatus(status) {
+        const time = new Date().toLocaleTimeString();
+        deviceStatus.push(`${status} at ${time}`);
+        updateStatusLog();
+    }
+
+    // Function to update the status log in the DOM
+    function updateStatusLog() {
+        statusLog.innerHTML = "";
+        deviceStatus.forEach(status => {
+            const li = document.createElement("li");
+            li.textContent = status;
+            statusLog.appendChild(li);
+        });
+    }
+
+    // Button events
+    onButton.addEventListener("click", () => {
+        logStatus("Device started");
+    });
+
+    offButton.addEventListener("click", () => {
+        logStatus("Device stopped");
+    });
+
+    // Form submission event
+    customForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const openTime = document.getElementById("openTime").value;
+        const closeTime = document.getElementById("closeTime").value;
+        const usage = document.getElementById("usage").value;
+
+        alert(`Device will open at ${openTime}, close at ${closeTime}, and run for ${usage} hours.`);
+    });
+});
+
+    </script>
+</body>
+</html>
