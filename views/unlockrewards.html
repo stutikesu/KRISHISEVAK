@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishisevak Voucher System</title>
+    
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f5f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    background-color: #4caf50;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+.voucher-section {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    display: inline-block;
+    background-color: #388e3c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2e7d32;
+}
+
+.voucher-card {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e8f5e9;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+</style>
+<body>
+    <header>
+        <h1>Krishiseva Voucher Generator</h1>
+        <p>Generate your unique rewards and vouchers based on water saved this month.</p>
+    </header>
+
+    <section class="voucher-section">
+        <form id="voucher-form">
+            <div class="form-group">
+                <label for="farmerName">Farmer's Name:</label>
+                <input type="text" id="farmerName" required>
+            </div>
+            <div class="form-group">
+                <label for="waterSaved">Water Saved (in liters):</label>
+                <input type="number" id="waterSaved" required>
+            </div>
+            <button type="submit">Generate Voucher</button>
+        </form>
+
+        <div id="voucher-result" class="voucher-card" style="display:none;">
+            <h2>Voucher for <span id="farmer-display-name"></span></h2>
+            <p>Congratulations! You've saved <span id="saved-liters"></span> liters of water.</p>
+            <p>Your unique reward is: <span id="reward"></span></p>
+            <p>Voucher Code: <span id="voucher-code"></span></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Thank you for using Krishiseva! Keep saving water and earning rewards.</p>
+    </footer>
+
+    <script>
+        document.getElementById("voucher-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    const farmerName = document.getElementById("farmerName").value;
+    const waterSaved = document.getElementById("waterSaved").value;
+    
+    // Generate a unique voucher code
+    const voucherCode = 'KRISHI-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+    
+    // Determine reward based on water saved
+    let reward;
+    if (waterSaved >= 500) {
+        reward = 'Exclusive Farming Kit';
+    } else if (waterSaved >= 100) {
+        reward = '10% Discount on Seeds';
+    } else {
+        reward = '5% Discount on Fertilizers';
+    }
+    
+    // Update the voucher display
+    document.getElementById("farmer-display-name").textContent = farmerName;
+    document.getElementById("saved-liters").textContent = waterSaved;
+    document.getElementById("reward").textContent = reward;
+    document.getElementById("voucher-code").textContent = voucherCode;
+    
+    // Show the voucher card
+    document.getElementById("voucher-result").style.display = 'block';
+    
+    // Clear the form
+    document.getElementById("voucher-form").reset();
+});
+
+    </script>
+</body>
+</html>

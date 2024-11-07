@@ -1,0 +1,35 @@
+<!-- Payment Confirmation Page (with Pay Now button) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Confirmation</h1>
+        <p><strong>Total Amount to Pay:</strong> ₹</p>
+
+        <h2>Select Payment Option</h2>
+        <form id="paymentForm" action="/generate-otp" method="POST">
+            <input type="hidden" name="transaction_id" value="<%= transactionId %>">
+            <input type="hidden" name="phone" value="<%= phone %>"> <!-- Farmer's phone number -->
+            <input type="hidden" name="amount" value="<%= totalAmount %>">
+
+            <label for="paymentOption">Choose Payment Method:</label>
+            <select name="paymentOption" id="paymentOption" required>
+                <option value="">Select a payment method</option>
+                <option value="cash">Cash</option>
+                <option value="emi">EMI</option>
+                <option value="card">Card</option>
+                <option value="upi">UPI</option>
+            </select>
+
+            <!-- Relevant payment fields based on option (like card details, UPI, etc.) -->
+
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+</body>
+</html>

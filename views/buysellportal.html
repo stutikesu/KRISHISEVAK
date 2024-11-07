@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishiseva Buy-Sell Page</title>
+
+</head>
+<style>
+    /* General body and container styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #2d3e50;
+}
+
+h2 {
+    color: #34495e;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Form layout on larger screens */
+@media (min-width: 768px) {
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    form label {
+        grid-column: span 2;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="tel"],
+    form select {
+        grid-column: span 2;
+    }
+
+    form button {
+        grid-column: span 2;
+    }
+}
+
+/* Custom styling for readonly fields */
+input[readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 767px) {
+    .container {
+        padding: 15px;
+    }
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Buy Krishiseva Products</h1>
+
+        <!-- Farmer Details Form -->
+        <div id="farmer-details">
+            <h2>Enter Farmer Details</h2>
+            <form id="farmerForm" action="/buysellproduct" method="POST">
+                <label>Farmer Name:</label>
+                <input type="text" name="name" id="farmerName" required><br>
+
+                <label>Email:</label>
+                <input type="email" name="email" id="email" required><br>
+
+                <label>Phone Number:</label>
+                <input type="tel" name="phone" id="phone" required><br>
+
+                <label>State:</label>
+                <select name="state" id="state" onchange="updateDistricts()" required>
+                    <option value="">Select State</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                </select><br>
+
+                <label>District:</label>
+                <select name="district" id="district" required>
+                    <option value="">Select District</option>
+                </select><br>
+
+                <label>Type of Farmer:</label>
+                <select name="farmer_type" id="farmerType" required>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select><br>
+
+                <label>Product Name:</label>
+                <input type="text" name="product_name" value="Smart Irrigation System" readonly><br>
+
+                <label>Irrigation Type:</label>
+                <select name="irrigation_type" id="irrigationType" onchange="updatePrice()" required>
+                    <option value="none" data-price="3000">Select Irrigation Type</option>
+                    <option value="drip" data-price="4000">Drip</option>
+                    <option value="sprinkler" data-price="4500">Sprinkler</option>
+                    <option value="subsurface" data-price="5000">Subsurface</option>
+                </select><br>
+
+
+                <label for="quantity">Select Quantity:</label>
+                <select name="quantity" id="quantity" required>
+                    <option value="" disabled selected>Select Quantity</option>
+                </select>
+               
+                <label>Final Price:</label>
+                <input type="text" name="final_price" id="finalPrice"><br>
+
+                <label for="paymentmode">Payment Mode:</label>
+                <select name="paymentmode" id="paymentmode" onchange="toggleCardDetails()" required>
+                    <option value="" disabled selected>Select Payment Mode</option>
+                    <option value="CASH">CASH</option>
+                    <option value="CARD">CARD</option>
+        
+            </select><br>
+
+            <!-- Card Details (hidden initially, shown when CARD is selected) -->
+            <div id="cardDetails">
+                <label>Card Holder Name:</label>
+                <input type="text" name="cardholder_name" id="cardholder_name"><br>
+
+                <label>Card Number:</label>
+                <input type="text" name="card_number" id="card_number"><br>
+
+                <label>Expiry Date:</label>
+                <input type="text" name="expiry_date" id="expiry_date" placeholder="MM/YY"><br>
+
+                <label>CVV:</label>
+                <input type="text" name="cvv" id="cvv"><br>
+            </div>
+            <button type="submit">Proceed to Payment</button>
+        </form>
+    </div>
+
+
+    <script>
+        const districtOptions = {
+            "Andhra Pradesh": ["Anantapur", "Chittoor", "East Godavari", "Guntur", "Krishna"],
+            "Arunachal Pradesh": ["Tawang", "West Kameng", "East Kameng", "Papum Pare"],
+            "Assam": ["Baksa", "Barpeta", "Biswanath", "Bongaigaon"],
+            "Bihar": ["Araria", "Arwal", "Aurangabad", "Banka", "Begusarai"],
+            "Chhattisgarh": ["Balod", "Baloda Bazar", "Balrampur", "Bastar"],
+            "Goa": ["North Goa", "South Goa"],
+            "Gujarat": ["Ahmedabad", "Amreli", "Anand", "Aravalli", "Banaskantha"],
+            "Haryana": ["Ambala", "Bhiwani", "Charkhi Dadri", "Faridabad"],
+            "Himachal Pradesh": ["Bilaspur", "Chamba", "Hamirpur", "Kangra"],
+            "Jharkhand": ["Bokaro", "Chatra", "Deoghar", "Dhanbad", "Dumka"],
+            "Karnataka": ["Bagalkot", "Ballari", "Belagavi", "Bengaluru"],
+            "Kerala": ["Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod"],
+            "Madhya Pradesh": ["Agar Malwa", "Alirajpur", "Anuppur", "Ashoknagar"],
+            "Maharashtra": ["Ahmednagar", "Akola", "Amravati", "Aurangabad"],
+            "Manipur": ["Bishnupur", "Chandel", "Churachandpur", "Imphal East"],
+            "Meghalaya": ["East Garo Hills", "East Jaintia Hills", "East Khasi Hills"],
+            "Mizoram": ["Aizawl", "Champhai", "Kolasib", "Lawngtlai"],
+            "Nagaland": ["Dimapur", "Kiphire", "Kohima", "Longleng"],
+            "Odisha": ["Angul", "Balangir", "Balasore", "Bargarh"],
+            "Punjab": ["Amritsar", "Barnala", "Bathinda", "Faridkot"],
+            "Rajasthan": ["Ajmer", "Alwar", "Banswara", "Baran"],
+            "Sikkim": ["East Sikkim", "North Sikkim", "South Sikkim", "West Sikkim"],
+            "Tamil Nadu": ["Ariyalur", "Chengalpattu", "Chennai", "Coimbatore"],
+            "Telangana": ["Adilabad", "Bhadradri Kothagudem", "Hyderabad", "Jagtial"],
+            "Tripura": ["Dhalai", "Gomati", "Khowai", "North Tripura"],
+            "Uttar Pradesh": ["Agra", "Aligarh", "Ambedkar Nagar", "Amethi"],
+            "Uttarakhand": ["Almora", "Bageshwar", "Chamoli", "Champawat"],
+            "West Bengal": ["Alipurduar", "Bankura", "Birbhum", "Cooch Behar"]
+        };
+
+    
+        
+
+
+        function updateDistricts() {
+            const state = document.getElementById("state").value;
+            const districtSelect = document.getElementById("district");
+            districtSelect.innerHTML = '<option value="">Select District</option>'; // Reset district options
+
+            if (state in districtOptions) {
+                const districts = districtOptions[state];
+                districts.forEach(function(district) {
+                    const option = document.createElement("option");
+                    option.value = district;
+                    option.text = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+        }
+
+
+                // Function to populate the quantity dropdown with options from 1 to 50
+                function populateQuantityDropdown() {
+            const quantitySelect = document.getElementById('quantity');
+
+            // Loop to create option elements for values 1 to 50
+            for (let i = 1; i <= 50; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.text = i;
+                quantitySelect.appendChild(option);
+            }
+        }
+
+        // Call the function to populate the dropdown when the page loads
+        window.onload = populateQuantityDropdown;
+
+        // Capture selected irrigation type and final price in form fields
+        function captureIrrigationAndPrice(irrigationType, finalPrice) {
+            document.getElementById('irrigationType').value = irrigationType;
+            document.getElementById('finalPrice').value = finalPrice;
+        }
+
+        // Example of how to capture data when proceeding to payment
+        function addToCart() {
+            captureIrrigationAndPrice('Sprinkler', 6000);  // Example
+        }
+
+        
+// Function to handle form submission via AJAX
+// document.getElementById('farmerForm').addEventListener('submit', async function (event) {
+//     event.preventDefault(); // Prevent the default form submission
+
+//     const formData = new FormData(this);
+
+//     try {
+//         // Send the form data using fetch API
+//         const response = await fetch('/buysellproduct', {
+//             method: 'POST',
+//             body: formData
+//         });
+
+//         if (response.ok) {
+//             const data = await response.json();
+            
+//             // Display the farmer_uuid and order_uuid for 5 seconds
+//             const messageContainer = document.createElement('div');
+//             messageContainer.innerHTML = `
+//                 <h2>Order Placed Successfully!</h2>
+//                 <p>Farmer UUID: ${data.farmer_uuid}</p>
+//                 <p>Order UUID: ${data.order_uuid}</p>
+//                 <p>You will be redirected to payment shortly...</p>
+//             `;
+//             document.body.appendChild(messageContainer);
+
+//             // Wait for 5 seconds (5000 milliseconds)
+//             setTimeout(function () {
+//                 // Redirect to confirmpayment page with farmer_uuid and order_uuid
+//                 window.location.href = `/confirmpayment?farmer_uuid=${data.farmer_uuid}&order_uuid=${data.order_uuid}&amount=${('100000')}`;
+//             }, 5000);
+//         } else {
+//             console.error('Error placing order:', await response.text());
+//         }
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// });
+
+function updatePrice() {
+            const irrigationType = document.getElementById("irrigationType").value;
+            let price = 3000;
+
+            switch (irrigationType) {
+                case 'sprinkler':
+                    price = 3500;
+                    break;
+                case 'flood':
+                    price = 4000;
+                    break;
+                case 'center pivot':
+                    price = 4500;
+                    break;
+                case 'lateral move':
+                    price = 5000;
+                    break;
+            }
+
+            document.getElementById('finalPrice').value = price;
+        }
+
+        function toggleCardDetails() {
+            const paymentMode = document.getElementById('paymentmode').value;
+            const cardDetails = document.getElementById('cardDetails');
+
+            if (paymentMode === 'CARD') {
+                cardDetails.style.display = 'block'; // Show card details
+            } else {
+                cardDetails.style.display = 'none'; // Hide card details
+            }
+        }
+
+    </script>
+</body>
+</html>

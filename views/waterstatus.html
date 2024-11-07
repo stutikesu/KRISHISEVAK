@@ -1,0 +1,99 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Conservation Gamification</title>
+    <link rel="stylesheet" href="\css\style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Water Conservation Challenge</h1>
+            <p>Track your water savings, earn rewards, and help conserve water for the environment!</p>
+        </header>
+
+        <!-- Water Savings Stats Section -->
+        <section class="water-stats">
+            <h2>Your Water Savings</h2>
+            <div class="stats">
+                <div class="stat">
+                    <h3>Total Water Saved</h3>
+                    <p><span id="water-saved">120</span> Liters</p>
+                </div>
+                <div class="stat">
+                    <h3>Consecutive Days</h3>
+                    <p><span id="consecutive-days">5</span> Days</p>
+                </div>
+                <div class="stat">
+                    <h3>Water Efficiency</h3>
+                    <p><span id="efficiency-score">85%</span> Efficient</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gamified Rewards Section -->
+        <section class="rewards">
+            <h2>Achievements</h2>
+            <div class="badges">
+                <div class="badge" id="badge-1">
+                    <img src="images/badge1.png" alt="Beginner Saver Badge">
+                    <p>Beginner Saver</p>
+                </div>
+                <div class="badge" id="badge-2">
+                    <img src="images/badge2.png" alt="Water Warrior Badge">
+                    <p>Water Warrior</p>
+                </div>
+                <div class="badge" id="badge-3">
+                    <img src="images/badge3.png" alt="Conservation Hero Badge">
+                    <p>Conservation Hero</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section class="progress-section">
+            <h2>Your Progress</h2>
+            <div class="progress-bar">
+                <div class="progress" id="progress-bar" style="width: 40%"></div>
+            </div>
+            <p>You're 40% of the way to your next goal!</p>
+        </section>
+
+        <!-- Leaderboard Section -->
+        <section class="leaderboard">
+            <h2>Leaderboard</h2>
+            <ol>
+                <li><strong>Alice</strong> - 350 Liters Saved</li>
+                <li><strong>Bob</strong> - 300 Liters Saved</li>
+                <li><strong>You</strong> - 120 Liters Saved</li>
+            </ol>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Keep up the good work and continue saving water!</p>
+            <A href="\rewards"><p>CHECK YOUR REWARDS!</p></A>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Example placeholder for tracking user's water savings
+let totalWaterSaved = 120;
+let consecutiveDays = 5;
+let waterEfficiency = 85; // Efficiency in percentage
+let goalProgress = 40; // Progress percentage
+
+// Update the water savings stats dynamically
+document.getElementById('water-saved').innerText = totalWaterSaved;
+document.getElementById('consecutive-days').innerText = consecutiveDays;
+document.getElementById('efficiency-score').innerText = waterEfficiency + '%';
+
+// Update progress bar
+document.getElementById('progress-bar').style.width = goalProgress + '%';
+    </script>
+</body>
+</html>
