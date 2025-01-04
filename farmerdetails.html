@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Background video styling */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        #farmer-details {
+            max-width: 500px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        @media (max-width: 600px) {
+            #farmer-details {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Video -->
+    <video id="bg-video" autoplay muted loop>
+        <source src="https://cdn.pixabay.com/video/2023/10/13/184811-874264378_tiny.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Farmer Details Form -->
+    <div id="farmer-details">
+        <h2>Farmer Details Form / किसान विवरण फॉर्म</h2>
+        <form id="farmerForm" onsubmit="proceedToPayment(event)">
+            <label>Farmer Name (किसान का नाम):</label>
+            <input type="text" id="farmerName" placeholder="Enter Farmer's Name / किसान का नाम दर्ज करें" required><br>
+
+            <label>Phone Number (फ़ोन नंबर):</label>
+            <input type="tel" id="phone" placeholder="Enter Phone Number / फ़ोन नंबर दर्ज करें" required><br>
+
+            <label>State (राज्य):</label>
+            <select id="state" onchange="updateDistricts()" required>
+                <option value="">Select State / राज्य चुनें</option>
+                <option value="Andhra Pradesh">Andhra Pradesh / आंध्र प्रदेश</option>
+                <option value="Bihar">Bihar / बिहार</option>
+                <option value="Karnataka">Karnataka / कर्नाटक</option>
+                <option value="Madhya Pradesh">Madhya Pradesh / मध्य प्रदेश</option>
+                <option value="Maharashtra">Maharashtra / महाराष्ट्र</option>
+                <option value="Uttar Pradesh">Uttar Pradesh / उत्तर प्रदेश</option>
+                <option value="West Bengal">West Bengal / पश्चिम बंगाल</option>
+            </select><br>
+
+            <label>District (जिला):</label>
+            <select id="district" required>
+                <option value="">Select District / जिला चुनें</option>
+            </select><br>
+
+            <label>Type of Farmer (किसान का प्रकार):</label>
+            <select id="farmerType" required>
+                <option value="">Select Type / प्रकार चुनें</option>
+                <option value="small">Small / छोटा</option>
+                <option value="medium">Medium / मध्यम</option>
+                <option value="large">Large / बड़ा</option>
+            </select><br>
+
+            <button type="submit">Proceed to Payment / भुगतान के लिए आगे बढ़ें</button>
+        </form>
+    </div>
+
+    <script>
+        const districts = {
+            "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur"],
+            "Bihar": ["Patna", "Gaya", "Bhagalpur"],
+            "Karnataka": ["Bengaluru", "Mysuru", "Mangaluru"],
+            "Madhya Pradesh": ["Bhopal", "Indore", "Gwalior"],
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
+            "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra"],
+            "West Bengal": ["Kolkata", "Darjeeling", "Howrah"]
+        };
+
+        function updateDistricts() {
+            const stateSelect = document.getElementById('state');
+            const districtSelect = document.getElementById('district');
+            const selectedState = stateSelect.value;
+
+            districtSelect.innerHTML = '<option value="">Select District / जिला चुनें</option>';
+
+            if (selectedState) {
+                districts[selectedState].forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+        }
+
+        function proceedToPayment(event) {
+            event.preventDefault();
+            alert("Proceeding to payment / भुगतान के लिए आगे बढ़ रहे हैं...");
+        }
+    </script>
+</body>
+
+</html>

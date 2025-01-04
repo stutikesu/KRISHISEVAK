@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Equipment and Truck Rentals</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .header {
+            background-color: green;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .rental-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .rental-item h3 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .rental-item p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .contact-btn {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .contact-btn:hover {
+            background-color: darkgreen;
+        }
+
+        .search-section {
+            margin-bottom: 30px;
+        }
+
+        .search-section input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Farm Equipment and Truck Rentals</h1>
+        <p>Find and book equipment directly from local providers across various states</p>
+    </div>
+
+    <div class="container">
+        <div class="search-section">
+            <h2>Search Equipment</h2>
+            <form class="form-inline">
+                <input type="text" class="form-control" id="searchKeyword" placeholder="Enter equipment name (e.g., Truck, Tractor)" style="width: 250px;">
+                <input type="text" class="form-control" id="location" placeholder="Enter location (State/City)" style="width: 250px;">
+                <button type="button" class="btn btn-success" onclick="searchRentals()">Search</button>
+            </form>
+        </div>
+
+        <div id="rentalResults">
+            <!-- Results will be populated here based on search -->
+        </div>
+    </div>
+
+    <script>
+        const rentalData = [
+            { id: 1, equipment: "Tractor", location: "Maharashtra - Pune", price: "₹1200/day", phone: "+91 9876543210", description: "Heavy-duty tractor for plowing and farming." },
+            { id: 2, equipment: "Truck", location: "Uttar Pradesh - Agra", price: "₹1500/day", phone: "+91 9876543211", description: "Heavy-duty truck for transporting crops." },
+            { id: 3, equipment: "Water Pump", location: "Punjab - Amritsar", price: "₹500/day", phone: "+91 9876543212", description: "Water pump for irrigation purposes." },
+            { id: 4, equipment: "Tractor", location: "Tamil Nadu - Coimbatore", price: "₹1000/day", phone: "+91 9876543213", description: "Tractor with attachments for farming." },
+            { id: 5, equipment: "Sprayer", location: "Haryana - Hisar", price: "₹800/day", phone: "+91 9876543214", description: "Sprayer for pesticides and fertilizers." },
+            { id: 6, equipment: "Harvester", location: "Madhya Pradesh - Bhopal", price: "₹2500/day", phone: "+91 9876543215", description: "Combine harvester for large-scale crop harvesting." },
+            { id: 7, equipment: "Tractor", location: "Rajasthan - Jaipur", price: "₹1200/day", phone: "+91 9876543216", description: "Tractor available for rent with a plowing attachment." },
+            { id: 8, equipment: "Water Pump", location: "Gujarat - Surat", price: "₹600/day", phone: "+91 9876543217", description: "Water pump for irrigation in farms." },
+            { id: 9, equipment: "Truck", location: "Uttar Pradesh - Kanpur", price: "₹1400/day", phone: "+91 9876543218", description: "Transport truck for carrying large quantities of crops." },
+            { id: 10, equipment: "Tractor", location: "Karnataka - Bengaluru", price: "₹1100/day", phone: "+91 9876543219", description: "Tractor for tilling and farming." },
+            { id: 11, equipment: "Sprayer", location: "Bihar - Patna", price: "₹700/day", phone: "+91 9876543220", description: "Sprayer for pesticide application." },
+            { id: 12, equipment: "Harvester", location: "West Bengal - Kolkata", price: "₹2500/day", phone: "+91 9876543221", description: "Combine harvester for quick crop collection." },
+            { id: 13, equipment: "Truck", location: "Andhra Pradesh - Vijayawada", price: "₹1600/day", phone: "+91 9876543222", description: "Large truck for transporting farm produce." },
+            { id: 14, equipment: "Tractor", location: "Kerala - Kochi", price: "₹1300/day", phone: "+91 9876543223", description: "Tractor for use in paddy fields." },
+            { id: 15, equipment: "Water Pump", location: "Uttarakhand - Dehradun", price: "₹550/day", phone: "+91 9876543224", description: "Water pump for irrigation in hilly terrain." },
+            {  
+  id: 16,  
+  equipment: "Harvester",  
+  location: "Uttar Pradesh - Varanasi",  
+  price: "₹2400/day",  
+  phone: "+91 9876543225",  
+  description: "Advanced harvester suitable for large farms."  
+},  
+{  
+  id: 17,  
+  equipment: "Tractor",  
+  location: "Uttar Pradesh - Lucknow",  
+  price: "₹1150/day",  
+  phone: "+91 9876543226",  
+  description: "Compact tractor ideal for small to medium farms."  
+},  
+{  
+  id: 18,  
+  equipment: "Sprayer",  
+  location: "Uttar Pradesh - Allahabad",  
+  price: "₹750/day",  
+  phone: "+91 9876543227",  
+  description: "Efficient sprayer for pesticide application."  
+},  
+{  
+  id: 19,  
+  equipment: "Truck",  
+  location: "Uttar Pradesh - Noida",  
+  price: "₹1550/day",  
+  phone: "+91 9876543228",  
+  description: "Truck suitable for crop and equipment transport."  
+},  
+{  
+  id: 20,  
+  equipment: "Water Pump",  
+  location: "Uttar Pradesh - Gorakhpur",  
+  price: "₹520/day",  
+  phone: "+91 9876543229",  
+  description: "Durable water pump for farm irrigation."  
+},
+{  
+  id: 21,  
+  equipment: "Tractor",  
+  location: "Uttar Pradesh - Meerut",  
+  price: "₹1200/day",  
+  phone: "+91 9876543230",  
+  description: "Tractor with advanced plowing and tilling capabilities."  
+},  
+{  
+  id: 22,  
+  equipment: "Tractor",  
+  location: "Uttar Pradesh - Bareilly",  
+  price: "₹1100/day",  
+  phone: "+91 9876543231",  
+  description: "Efficient tractor for medium-sized farms."  
+},  
+{  
+  id: 23,  
+  equipment: "Tractor",  
+  location: "Uttar Pradesh - Ghaziabad",  
+  price: "₹1250/day",  
+  phone: "+91 9876543232",  
+  description: "Powerful tractor with attachments for diverse farming needs."  
+},  
+{  
+  id: 24,  
+  equipment: "Tractor",  
+  location: "Uttar Pradesh - Mathura",  
+  price: "₹1300/day",  
+  phone: "+91 9876543233",  
+  description: "Heavy-duty tractor for field preparation and plowing."  
+},  
+{  
+  id: 25,  
+  equipment: "Tractor",  
+  location: "Uttar Pradesh - Aligarh",  
+  price: "₹1150/day",  
+  phone: "+91 9876543234",  
+  description: "Multi-purpose tractor for farming and transport."  
+},  
+{  
+  id: 26,  
+  equipment: "Tractor",  
+  location: "Uttar Pradesh - Jhansi",  
+  price: "₹1250/day",  
+  phone: "+91 9876543235",  
+  description: "Reliable tractor for challenging farm terrains."  
+}  
+
+
+            
+
+        ];
+
+        function searchRentals() {
+            const searchKeyword = document.getElementById('searchKeyword').value.toLowerCase();
+            const location = document.getElementById('location').value.toLowerCase();
+            const results = rentalData.filter(item =>
+                (item.equipment.toLowerCase().includes(searchKeyword) || searchKeyword === '') &&
+                (item.location.toLowerCase().includes(location) || location === '')
+            );
+
+            displayResults(results);
+        }
+
+        function displayResults(results) {
+            const rentalResultsDiv = document.getElementById('rentalResults');
+            rentalResultsDiv.innerHTML = ""; // Clear previous results
+
+            if (results.length > 0) {
+                results.forEach(item => {
+                    const rentalItemDiv = document.createElement('div');
+                    rentalItemDiv.classList.add('rental-item');
+                    rentalItemDiv.innerHTML = `
+                        <h3>${item.equipment} - ${item.location}</h3>
+                        <p><strong>Price:</strong> ${item.price}</p>
+                        <p><strong>Description:</strong> ${item.description}</p>
+                        <p><strong>Contact:</strong> <a href="tel:${item.phone}" class="contact-btn">${item.phone}</a></p>
+                    `;
+                    rentalResultsDiv.appendChild(rentalItemDiv);
+                });
+            } else {
+                rentalResultsDiv.innerHTML = "<p>No rentals found. Try modifying your search.</p>";
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

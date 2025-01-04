@@ -1,0 +1,77 @@
+Webcam field view code:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrishiSevak.AI Camera Control</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        video, img {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Drone view</h1>
+        <p>Below is the live stream of your field</p>
+        <img id="cameraFeed" alt="Live Camera Feed" src="http://192.168.137.71:8080/video" />
+        <!-- Replace the IP and port with the ones from your IP Webcam app -->
+        <div>
+            <button id="toggleFlash">Toggle Flash</button>
+        </div>
+    </div>
+
+    <script>
+        const flashButton = document.getElementById('toggleFlash');
+
+        // Replace this with your actual IP Webcam IP and port
+        const baseUrl = 'http://192.168.137.71:8080'; 
+
+        // Flash toggle logic
+        let flashState = false;
+
+        flashButton.addEventListener('click', () => {
+            flashState = !flashState; // Toggle the state
+            const flashUrl = ${baseUrl}/enabletorch?set=${flashState ? 'on' : 'off'};
+            
+            // Send a request to toggle the flash
+            fetch(flashUrl)
+                .then(response => {
+                    if (response.ok) {
+                        alert(Flashlight turned ${flashState ? 'ON' : 'OFF'});
+                    } else {
+                        alert('Failed to toggle flashlight. Please check the connection.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while toggling the flashlight.');
+                });
+        });
+    </script>
+</body>
+</html>

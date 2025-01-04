@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit and Loss Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f9f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+        }
+
+        .profit {
+            color: green;
+        }
+
+        .loss {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Profit and Loss Calculator</h1>
+        <p>Calculate your profit or loss in farming!</p>
+    </header>
+
+    <div class="container">
+        <h2>Enter Your Details</h2>
+        <label for="expenses">Total Expenses (₹):</label>
+        <input type="number" id="expenses" placeholder="Enter your total expenses" required>
+
+        <label for="revenue">Total Revenue (₹):</label>
+        <input type="number" id="revenue" placeholder="Enter your total revenue" required>
+
+        <button onclick="calculateProfitLoss()">Calculate</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateProfitLoss() {
+            const expenses = parseFloat(document.getElementById('expenses').value);
+            const revenue = parseFloat(document.getElementById('revenue').value);
+            const resultDiv = document.getElementById('result');
+
+            // Ensure valid input
+            if (isNaN(expenses) || isNaN(revenue)) {
+                resultDiv.innerHTML = "Please enter valid numbers for both fields.";
+                resultDiv.style.color = 'red';
+                return;
+            }
+
+            // Calculate profit or loss
+            const result = revenue - expenses;
+
+            if (result > 0) {
+                resultDiv.innerHTML = `Profit: ₹${result.toFixed(2)}`;
+                resultDiv.className = "result profit";
+            } else if (result < 0) {
+                resultDiv.innerHTML = `Loss: ₹${Math.abs(result).toFixed(2)}`;
+                resultDiv.className = "result loss";
+            } else {
+                resultDiv.innerHTML = "No Profit, No Loss.";
+                resultDiv.style.color = '#333';
+            }
+        }
+    </script>
+</body>
+</html>

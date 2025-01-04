@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishisevak.AI Subscription Packages</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .package-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .package-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 1.5rem;
+            margin: 1rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .package-card:hover {
+            transform: scale(1.05);
+        }
+
+        .package-card h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .package-card ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-card ul li {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .package-card button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .package-card button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .close-modal, .buy-product {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .close-modal:hover, .buy-product:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Krishisevak.AI Subscription Packages</h1>
+        <p>Choose the package that suits your needs.</p>
+    </header>
+
+    <section class="package-container">
+        <!-- Package 1 -->
+        <div class="package-card">
+            <h2>Package 1: Complete Solution</h2>
+            <ul>
+                <li>Irrigation System with Desired Irrigation Type</li>
+                <li>Technician Services</li>
+                <li>Drone</li>
+                <li>Camera</li>
+                <li>Full Features of Website & App</li>
+            </ul>
+            <button onclick="showDetails(1)">View Details</button>
+        </div>
+
+        <!-- Package 2 -->
+        <div class="package-card">
+            <h2>Package 2: Advanced Irrigation</h2>
+            <ul>
+                <li>Irrigation System with Desired Irrigation Type</li>
+                <li>Technician Services</li>
+                <li>Camera</li>
+                <li>Full Features of Website & App</li>
+            </ul>
+            <button onclick="showDetails(2)">View Details</button>
+        </div>
+
+        <!-- Package 3 -->
+        <div class="package-card">
+            <h2>Package 3: Standard Irrigation</h2>
+            <ul>
+                <li>Irrigation System with Desired Irrigation Type</li>
+                <li>Technician Services</li>
+                <li>Full Features of Website & App</li>
+            </ul>
+            <button onclick="showDetails(3)">View Details</button>
+        </div>
+
+        <!-- Package 4 -->
+        <div class="package-card">
+            <h2>Package 4: Basic Irrigation</h2>
+            <ul>
+                <li>Irrigation System with Desired Irrigation Type</li>
+                <li>Technician Services</li>
+                <li>Drone</li>
+                <li>Full Features of Website & App</li>
+            </ul>
+            <button onclick="showDetails(4)">View Details</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Krishisevak.AI | All Rights Reserved</p>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <h2>Package Details</h2>
+            <p id="packageInfo"></p>
+            <div class="actions">
+                <button class="close-modal" onclick="closeModal()">Close</button>
+                <button class="buy-product" onclick="buyProduct()">Buy Product</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('detailsModal');
+        const packageInfo = document.getElementById('packageInfo');
+
+        function showDetails(packageId) {
+            let details = "";
+
+            if (packageId === 1) {
+                details = "Package 1 includes Irrigation module - ₹3,000, Drone - ₹10,000, Camera - ₹2,000. Total cost: ₹15,000 + extra charges (for irrigation type and field size).";
+            } else if (packageId === 2) {
+                details = "Package 2 includes Irrigation module - ₹3,000, Camera - ₹2,000. Total cost: ₹5,000 + extra charges (for irrigation type and field size).";
+            } else if (packageId === 3) {
+                details = "Package 3 includes Irrigation module - ₹3,000. Total cost: ₹3,000 + extra charges (for irrigation type and field size).";
+            } else if (packageId === 4) {
+                details = "Package 4 includes Irrigation module - ₹3,000, Drone - ₹2,000. Total cost: ₹13,000 + extra charges (for irrigation type and field size).";
+            }
+
+            packageInfo.textContent = details;
+            modal.style.display = "flex";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        function buyProduct() {
+            window.location.href = '/buysellportal'; // Replace with the correct Buy/Sell Product URL
+        }
+    </script>
+</body>
+</html>

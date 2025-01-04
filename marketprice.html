@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Price Tracking for Farmers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f9f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .result {
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Market Price Tracking for Farmers</h1>
+        <p>Track the current market prices of your products!</p>
+    </header>
+
+    <div class="container">
+        <h2>Enter Product Details</h2>
+        <label for="product">Product Name:</label>
+        <input type="text" id="product" placeholder="Enter product name" required>
+
+        <label for="price">Market Price (₹):</label>
+        <input type="number" id="price" placeholder="Enter market price" required>
+
+        <button onclick="addProduct()">Add Product</button>
+
+        <h2>Current Market Prices</h2>
+        <table id="priceTable">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Market Price (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic Product Price Entries -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>© 2024 Market Price Tracking. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Function to add product price to the table
+        function addProduct() {
+            const product = document.getElementById('product').value;
+            const price = document.getElementById('price').value;
+            const table = document.getElementById('priceTable').getElementsByTagName('tbody')[0];
+
+            // Ensure valid input
+            if (product === "" || price === "" || isNaN(price)) {
+                alert("Please enter valid product name and price.");
+                return;
+            }
+
+            // Create new row for the table
+            const newRow = table.insertRow();
+            const productCell = newRow.insertCell(0);
+            const priceCell = newRow.insertCell(1);
+
+            // Add the data to the row
+            productCell.textContent = product;
+            priceCell.textContent = "₹" + price;
+
+            // Clear the input fields
+            document.getElementById('product').value = "";
+            document.getElementById('price').value = "";
+        }
+    </script>
+
+</body>
+</html>
